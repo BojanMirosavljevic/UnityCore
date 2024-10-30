@@ -80,5 +80,5 @@ public enum Scene
 {
     None = -1,
     Loading = 0,
-    Game = 2
+    Game = 1
 }
