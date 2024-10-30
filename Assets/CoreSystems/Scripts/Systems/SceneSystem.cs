@@ -20,7 +20,7 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
         InputSystem.Instance.DisableInputSystem("LoadScene");
 
         isFaded = false;
-        StartCoroutine(FadeTo(true, fadeDuration, () => {
+        StartCoroutine(FadeTo(true, fadeDuration, 0f, () => {
             isFaded = true;
         }));
         
@@ -37,7 +37,7 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
 
         SceneManager.LoadScene(sceneIndex);
 
-        StartCoroutine(FadeTo(false, fadeDuration, () => {
+        StartCoroutine(FadeTo(false, fadeDuration, 0.5f, () => {
             InputSystem.Instance.EnableInputSystem("LoadScene");
             callback?.Invoke();
         }));
@@ -53,8 +53,10 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
         return GetActiveScene() == scene;
     }
 
-    private IEnumerator FadeTo(bool black, float duration, Action onComplete)
+    private IEnumerator FadeTo(bool black, float duration, float delay, Action onComplete)
     {
+        yield return new WaitForSecondsRealtime(delay);
+
         float startAlpha = blackFaderCanvas.alpha;
         float endAlpha = black ? 1f : 0f;
         if (startAlpha != endAlpha)
