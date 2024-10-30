@@ -137,11 +137,21 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
         );
         
         AddButton(
-            "Button",
+            "Button Loading",
             () =>
             {
-                Debug.LogError("Button clicked");
-            }
+                Debug.LogError("Button loading clicked");
+            },
+            sceneOnly: Scene.Loading
+        );
+
+        AddButton(
+            "Button Game",
+            () =>
+            {
+                Debug.LogError("Button game clicked");
+            },
+            sceneOnly: Scene.Game
         );
     }
 }
