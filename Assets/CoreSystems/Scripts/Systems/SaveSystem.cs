@@ -56,7 +56,6 @@ public class SaveSystem : PersistentSingleton<SaveSystem>
         yield return new WaitForEndOfFrame();
         foreach (string save in ChangedSaves)
         {
-            // Debug.LogError("Saving " + save);
             Saves[save].Save();
         }
         ChangedSaves.Clear();
